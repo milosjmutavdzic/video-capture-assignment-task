@@ -5,7 +5,7 @@ interface Props {
 
 function Instructions({ onStart, disabled }: Props) {
   return (
-    <section className="instructions">
+    <section className="instructions card">
       <h1 className="instructions__title">Video capture</h1>
       <p className="instructions__description">
         Click the button to allow camera access. A photo will be taken

@@ -38,7 +38,7 @@ body {
   color: #fff;
   border: none;
   border-radius: 8px;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
@@ -62,6 +62,59 @@ body {
   cursor: not-allowed;
 }
 
+.video-area {
+  padding: 0;
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: relative;
+}
+
+.video-feed {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  background: #000;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.countdown-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+
+.error-msg {
+  color: #c5221f;
+  font-size: 1rem;
+  padding: 20px 24px;
+  line-height: 1.5;
+}
+
 .instructions {
   display: flex;
   flex-direction: column;
@@ -75,7 +128,7 @@ body {
 }
 
 .instructions__description {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: #5f6368;
   line-height: 1.6;
 }

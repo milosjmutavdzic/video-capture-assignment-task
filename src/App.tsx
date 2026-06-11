@@ -1,11 +1,21 @@
 import Instructions from './components/Instructions'
+import VideoPreview from './components/VideoPreview'
+import useCameraCapture from './hooks/useCameraCapture'
 
 function App() {
+  const { phase, videoEl, photo, error, secondsLeft, start } = useCameraCapture()
+
+  const isRunning = phase === 'starting' || phase === 'live'
+
   return (
     <main className="app">
-      <div className="card">
-        <Instructions onStart={() => {}} disabled={false} />
-      </div>
+      <Instructions onStart={start} disabled={isRunning} />
+      <VideoPreview
+        videoEl={videoEl}
+        phase={phase}
+        secondsLeft={secondsLeft}
+        error={error}
+      />
     </main>
   )
 }

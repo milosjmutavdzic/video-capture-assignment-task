@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type Phase = 'idle' | 'starting' | 'live' | 'done' | 'error'
 
@@ -75,6 +75,13 @@ function useCameraCapture() {
       setPhase('error')
     }
   }
+
+  useEffect(() => {
+    return () => {
+      if (countdownId.current) clearInterval(countdownId.current)
+      stream.current?.getTracks().forEach((track) => track.stop())
+    }
+  }, [])
 
   return { phase, videoEl, photo, error, secondsLeft, start }
 }
