@@ -1,27 +1,27 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 interface Props {
-  videoEl: React.RefObject<HTMLVideoElement | null>
-  phase: 'idle' | 'starting' | 'live' | 'done' | 'error'
-  secondsLeft: number
-  error: string | null
+  videoEl: React.RefObject<HTMLVideoElement | null>;
+  phase: 'idle' | 'starting' | 'live' | 'done' | 'error';
+  secondsLeft: number;
+  error: string | null;
 }
 
 function VideoPreview({ videoEl, phase, secondsLeft, error }: Props) {
   useEffect(() => {
     if (videoEl.current && phase === 'live') {
-      videoEl.current.play().catch(() => {})
+      videoEl.current.play().catch(() => {});
     }
-  }, [phase, videoEl])
+  }, [phase, videoEl]);
 
-  if (phase === 'idle') return null
+  if (phase === 'idle' || phase === 'done') return null;
 
   if (phase === 'error') {
     return (
       <div className="card video-area">
         <p className="error-msg">{error}</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -42,7 +42,7 @@ function VideoPreview({ videoEl, phase, secondsLeft, error }: Props) {
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default VideoPreview
+export default VideoPreview;

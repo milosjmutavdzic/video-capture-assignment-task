@@ -1,11 +1,12 @@
-import Instructions from './components/Instructions'
-import VideoPreview from './components/VideoPreview'
-import useCameraCapture from './hooks/useCameraCapture'
+import Instructions from './components/Instructions';
+import VideoPreview from './components/VideoPreview';
+import Snapshot from './components/Snapshot';
+import useCameraCapture from './hooks/useCameraCapture';
 
 function App() {
-  const { phase, videoEl, photo, error, secondsLeft, start } = useCameraCapture()
+  const { phase, videoEl, photo, error, secondsLeft, start } = useCameraCapture();
 
-  const isRunning = phase === 'starting' || phase === 'live'
+  const isRunning = phase === 'starting' || phase === 'live';
 
   return (
     <main className="app">
@@ -16,8 +17,9 @@ function App() {
         secondsLeft={secondsLeft}
         error={error}
       />
+      {photo && <Snapshot url={photo} />}
     </main>
-  )
+  );
 }
 
-export default App
+export default App;

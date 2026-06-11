@@ -115,6 +115,24 @@ body {
   line-height: 1.5;
 }
 
+.snapshot {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.snapshot__label {
+  font-size: 0.9rem;
+  color: #5f6368;
+}
+
+.snapshot__img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
 .instructions {
   display: flex;
   flex-direction: column;

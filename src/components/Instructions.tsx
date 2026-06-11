@@ -1,6 +1,6 @@
 interface Props {
-  onStart: () => void
-  disabled: boolean
+  onStart: () => void;
+  disabled: boolean;
 }
 
 function Instructions({ onStart, disabled }: Props) {
@@ -15,7 +15,7 @@ function Instructions({ onStart, disabled }: Props) {
         Start
       </button>
     </section>
-  )
+  );
 }
 
-export default Instructions
+export default Instructions;
