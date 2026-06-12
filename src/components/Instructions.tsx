@@ -1,4 +1,5 @@
 import InfoIcon from '../icons/InfoIcon';
+import ThemeToggle from './ThemeToggle';
 
 const CAPTURE_DELAY = 5;
 
@@ -7,15 +8,19 @@ interface Props {
   isRunning: boolean;
   secondsLeft: number;
   photoUrl: string | null;
+  theme: 'light' | 'dark';
+  onThemeToggle: () => void;
 }
 
-function Instructions({ onStart, isRunning, secondsLeft, photoUrl }: Props) {
+function Instructions({ onStart, isRunning, secondsLeft, photoUrl, theme, onThemeToggle }: Props) {
   const progress = ((CAPTURE_DELAY - secondsLeft) / CAPTURE_DELAY) * 100;
 
   return (
     <section className="instructions card">
       <header className="instructions__header">
+        <ThemeToggle theme={theme} onToggle={onThemeToggle} />
         <h1 className="instructions__title">Video capture</h1>
+        <span />
       </header>
       <div className="instructions__body">
         <div className="instructions__info">
