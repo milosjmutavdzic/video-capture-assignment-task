@@ -1,9 +1,10 @@
 interface Props {
   onStart: () => void;
   disabled: boolean;
+  buttonLabel: string;
 }
 
-function Instructions({ onStart, disabled }: Props) {
+function Instructions({ onStart, disabled, buttonLabel }: Props) {
   return (
     <section className="instructions card">
       <h1 className="instructions__title">Video capture</h1>
@@ -12,7 +13,7 @@ function Instructions({ onStart, disabled }: Props) {
         automatically after a few seconds.
       </p>
       <button className="btn-primary" onClick={onStart} disabled={disabled}>
-        Start
+        {buttonLabel}
       </button>
     </section>
   );

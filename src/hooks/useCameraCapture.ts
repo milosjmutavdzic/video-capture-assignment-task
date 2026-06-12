@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { cameraErrorMessage, captureFrame } from '../utils/camera';
 
 type Phase = 'idle' | 'starting' | 'live' | 'done' | 'error';
 
@@ -30,12 +31,7 @@ function useCameraCapture() {
     const video = videoEl.current;
     if (!video) return;
 
-    const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext('2d')?.drawImage(video, 0, 0);
-
-    setPhoto(canvas.toDataURL('image/png'));
+    setPhoto(captureFrame(video));
     stopCamera();
     setPhase('done');
   }
@@ -48,6 +44,12 @@ function useCameraCapture() {
     setPhoto(null);
     setSecondsLeft(CAPTURE_DELAY);
     setPhase('starting');
+
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setError('Camera capture is not supported in this browser or context.');
+      setPhase('error');
+      return;
+    }
 
     try {
       const media = await navigator.mediaDevices.getUserMedia({
@@ -70,8 +72,8 @@ function useCameraCapture() {
           takePhoto();
         }
       }, 1000);
-    } catch {
-      setError('We could not access your camera. Please allow access and try again.');
+    } catch (err) {
+      setError(cameraErrorMessage(err));
       setPhase('error');
     }
   }

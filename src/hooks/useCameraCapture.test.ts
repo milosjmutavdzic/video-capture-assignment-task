@@ -37,8 +37,10 @@ describe('useCameraCapture', () => {
     });
   });
 
-  it('shows an error when access is denied', async () => {
-    mockGetUserMedia(() => Promise.reject(new Error('denied')));
+  it('shows a blocked message when the user denies access', async () => {
+    mockGetUserMedia(() =>
+      Promise.reject(new DOMException('denied', 'NotAllowedError')),
+    );
 
     const { result } = renderHook(() => useCameraCapture());
 
@@ -47,6 +49,21 @@ describe('useCameraCapture', () => {
     });
 
     expect(result.current.phase).toBe('error');
-    expect(result.current.error).toMatch(/camera/i);
+    expect(result.current.error).toMatch(/blocked/i);
+  });
+
+  it('shows a not-found message when there is no camera', async () => {
+    mockGetUserMedia(() =>
+      Promise.reject(new DOMException('missing', 'NotFoundError')),
+    );
+
+    const { result } = renderHook(() => useCameraCapture());
+
+    await act(async () => {
+      await result.current.start();
+    });
+
+    expect(result.current.phase).toBe('error');
+    expect(result.current.error).toMatch(/no camera/i);
   });
 });
