@@ -4,9 +4,7 @@ A single-page React application that accesses the user's camera via the WebRTC `
 
 ## Demo
 
-<!-- Demo recording -->
-
-https://github.com/TODO_REPLACE/assets/demo.mp4
+https://github.com/milosjmutavdzic/video-capture-assignment-task/blob/main/demo/demo.webm
 
 
 ## Tech stack
