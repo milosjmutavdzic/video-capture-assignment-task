@@ -19,7 +19,7 @@ function VideoPreview({ videoEl, phase, secondsLeft, error }: Props) {
   if (phase === 'error') {
     return (
       <div className="card video-area">
-        <p className="error-msg">{error}</p>
+        <p className="error-msg" role="alert">{error}</p>
       </div>
     );
   }
@@ -30,12 +30,13 @@ function VideoPreview({ videoEl, phase, secondsLeft, error }: Props) {
         <video
           ref={videoEl}
           className="video-feed"
+          aria-label="Live camera preview"
           autoPlay
           playsInline
           muted
         />
         {phase === 'live' && (
-          <div className="countdown-badge">{secondsLeft}</div>
+          <div className="countdown-badge" aria-live="polite" aria-label={`Photo in ${secondsLeft} seconds`}>{secondsLeft}</div>
         )}
         {phase === 'starting' && (
           <div className="video-overlay">Requesting camera access...</div>
