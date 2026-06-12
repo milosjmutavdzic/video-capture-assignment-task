@@ -61,6 +61,15 @@ function useCameraCapture() {
       if (videoEl.current) {
         videoEl.current.srcObject = media;
       }
+
+      media.getTracks().forEach((track) => {
+        track.onended = () => {
+          stopCountdown();
+          setError('Camera access was revoked. Please try again.');
+          setPhase('error');
+        };
+      });
+
       setPhase('live');
 
       let remaining = CAPTURE_DELAY;
